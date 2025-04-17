@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Anda.ServiciosAPI.props" />
+</Project>
