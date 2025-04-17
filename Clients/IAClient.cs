@@ -11,7 +11,7 @@ public class ServicioIAClient
     public ServicioIAClient(HttpClient http)
     {
         _http = http;
-        _http.BaseAddress = new Uri("http://localhost:5001");
+        _http.BaseAddress = new Uri("https://viajes_ai_cotizador.railway.internal");
     }
 
     public async Task<JsonDocument?> EnviarCotizacionAsync(string prompt, List<object> servicios)
