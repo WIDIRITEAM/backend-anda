@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: AllowFrontendOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:5173", "http://127.0.0.1:5173", "front.railway.internal", "front", "front-production-1fc1.up.railway.app")
+                          policy.WithOrigins("http://localhost:5173", "http://127.0.0.1:5173")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                       });
@@ -29,11 +29,16 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 var app = builder.Build();
 
-
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseCors(AllowFrontendOrigins);
 
 app.UseAuthorization();
 app.MapControllers();
-app.Run();
+
+// Log del puerto de ejecución
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000"; // Usa el puerto especificado en el entorno o por defecto 5000
+Console.WriteLine($"Aplicación corriendo en el puerto {port}");
+
+// Configura el puerto
+app.Run($"http://0.0.0.0:{port}");
